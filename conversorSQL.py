@@ -5,12 +5,21 @@ from tkinter import filedialog
 
 def inferir_tipo_sql(serie):
     """Inferir el tipo de dato SQL basado en los valores de la columna."""
-    if pd.api.types.is_integer_dtype(serie.dropna()):
+    serie_limpia = serie.dropna()
+
+    if pd.api.types.is_integer_dtype(serie_limpia):
         return "INT"
-    elif pd.api.types.is_float_dtype(serie.dropna()):
+    elif pd.api.types.is_float_dtype(serie_limpia):
         return "FLOAT"
+    elif pd.api.types.is_bool_dtype(serie_limpia) or set(serie_limpia.unique()) == {0, 1}:
+        return "BIT"
+    elif pd.api.types.is_datetime64_any_dtype(serie_limpia):
+        return "DATETIME"
+    elif pd.api.types.is_object_dtype(serie_limpia):  # Verificar si es texto
+        max_length = serie_limpia.astype(str).str.len().max()  # Longitud máxima de las cadenas
+        return f"NVARCHAR({min(max_length, 255)})" if max_length else "NVARCHAR(255)"
     else:
-        return "NVARCHAR(255)"  # Texto por defecto
+        return "NVARCHAR(255)"  # Tipo por defecto para datos desconocidos
 
 def excel_a_sql():
     """Permite al usuario seleccionar un archivo Excel y generar un SQL dinámico."""
