@@ -43,8 +43,8 @@ Con el tiempo, se agregarán más tipos de archivos que podrán ser convertidos 
 La incorporación de estos nuevos formatos permitirá a los usuarios convertir una gama más amplia de archivos en sentencias SQL, mejorando la flexibilidad y utilidad del script.
 Ejemplo de salida
 Si el archivo Excel contiene una tabla con las siguientes columnas:
-![image](https://github.com/user-attachments/assets/f5a62754-6208-4c2b-a1d4-29552d919deb)
 
+	![image](https://github.com/user-attachments/assets/f5a62754-6208-4c2b-a1d4-29552d919deb)
 
 RESULTADO EN SQL
 	![image](https://github.com/user-attachments/assets/daaf4ffd-2bf1-4df7-bcb0-646c2e385401)
